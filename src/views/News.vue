@@ -75,7 +75,7 @@
                     <span class="headline">{{openpost.title}}</span>
                     <span class="subtitle-2">{{openpost.author}}</span>
                 </v-card-title>
-                <v-img class="white--text align-end mb-4" height="400px" :src="openpost.img">
+                <v-img class="white--text align-end mb-4" height="300px" :src="openpost.img">
                 </v-img>
                 <v-card-text v-html="openpost.content"></v-card-text>
                 <v-card-actions>
