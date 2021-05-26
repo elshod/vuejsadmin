@@ -14,6 +14,9 @@
         <v-row>
             <v-col cols="12">
                 <v-data-table :headers="headers" :items="products" :items-per-page="10" class="elevation-1">
+                    <template v-slot:item.category="{ item }">
+                        {{ getCategory(item.category) }} 
+                    </template>
                     <template v-slot:item.btns="{ item }">
                         <div class="text-right">
                             <v-btn color="info" @click="show(item)">
@@ -66,8 +69,8 @@
                                 <v-text-field label="Mahsulot link*" v-model='link' required></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6">
-                                <v-autocomplete :items="categories" item-text="title" item-value="id"
-                                    label="Qaysi kategoriyaga tegishli" multiple></v-autocomplete>
+                                <v-autocomplete :items="categories" v-model="product.category" item-text="title" item-value="id"
+                                    label="Qaysi kategoriyaga tegishli"></v-autocomplete>
                             </v-col>
                             <v-col cols="12" sm="6">
                                 <v-autocomplete v-model="product.comp" :items="company" label="Ishlab chiqaruvchi">
@@ -138,10 +141,7 @@
                     text: 'Havola',
                     value: 'link'
                 },
-                {
-                    text: 'Mavjudligi',
-                    value: 'hide'
-                },
+                { text: 'Kategoriyasi', value: 'category' },
                 {
                     text: '',
                     value: 'btns'
@@ -149,6 +149,15 @@
             ],
         }),
         methods: {
+            getCategory(id){
+                let title = ''
+                this.categories.find(c => { 
+                        if (c.id == id)
+                            title = c.title
+                    }
+                )
+                return title
+            },
             show(item){
                 this.showProduct = item 
                 this.isShow = true

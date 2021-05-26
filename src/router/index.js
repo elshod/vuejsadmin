@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import ViewCategory from '../views/Product/ViewCategory.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,10 +21,16 @@ const routes = [
     component: () => import('../views/News.vue')
   },
   {
-    path: '/category',
-    name: 'Category',
-    component: () => import('../views/Category.vue')
+    path: '/category', 
+    name: 'category',
+    component: () => import('../views/Category.vue'),
+
   },
+  {
+      path: '/category/:id',  //  /category/2
+      name: 'viewcategory',
+      component: ViewCategory 
+  }
 ]
 
 const router = new VueRouter({
